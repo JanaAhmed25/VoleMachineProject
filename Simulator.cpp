@@ -6,7 +6,7 @@ Simulator::Simulator() {
 		memory[i] = 0;
 	}
 }
-//  /*/*/*/*…………… */
+
 void Simulator::fetch() {
 	unsigned char PC = cpu.getPC();
 	unsigned char High = memory[PC];
@@ -16,7 +16,7 @@ void Simulator::fetch() {
 	cpu.setPC(PC + 2);
 
 }
-// /*/*/*/*……………
+
 Instruction* Simulator::decode() {
 	unsigned short ir = cpu.getIR();
 	unsigned char opcode = ir >> 12;
@@ -27,7 +27,7 @@ Instruction* Simulator::decode() {
 		return nullptr;
 	}
 }
-// /*/*/*/*……………
+
 void Simulator::step() {
 	fetch();
 	Instruction* inst = decode();
@@ -39,7 +39,7 @@ void Simulator::step() {
 	delete inst;
 }
 
-// /*/*/*/*……………
+
 void Simulator::run() {
 	while (!cpu.getHalted()) {
 		step();

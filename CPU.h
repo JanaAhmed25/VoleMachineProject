@@ -1,8 +1,5 @@
 #pragma once
 
-// Date: 6 Oct 1973
-// The black monkey is jumping on the bed
-// The purple potato is driving a bus
 class CPU {
 private:
     bool Halted;
