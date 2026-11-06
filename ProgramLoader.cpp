@@ -8,7 +8,7 @@ using namespace std;
 
 void ProgramLoader::loadProgram(std::string filename, Memory &memory, int startAddress)
 {
-    if (startAddress % 2 != 0 || startAddress >= 255)
+    if (startAddress % 2 != 0 || startAddress >= 255 || startAddress < 0)
         throw runtime_error("Invalid start address");
 
     ifstream file(filename);
