@@ -4,6 +4,7 @@
 #include "Memory.h"
 #include "Screen.h"
 #include <string>
+#include "ProgramLoader.h"
 
 class Simulator {
 private:
@@ -12,6 +13,7 @@ private:
     Screen screen;
 
 public:
+    void loadProgram(const std::string& filename, int startAddress);
     void fetch();
     Instruction* decode();
     void step();

@@ -16,6 +16,16 @@ Instruction* Simulator::decode() {
 	unsigned short ir = cpu.getIR();
 	unsigned char opcode = ir >> 12;
 	switch (opcode) {
+	case 0x4: {
+		unsigned char r = (ir >> 4) & 0xF;
+		unsigned char s = ir & 0xF;
+		return new MoveInstruction(r, s);
+	}
+	case 0xB: {
+		unsigned char r = (ir >> 8) & 0xF;
+		unsigned char xy = ir & 0xFF;
+		return new JumpInstruction(r, xy);
+	}
 	case 0xC:
 		return new HaltInstruction();
 	default:
@@ -73,4 +83,18 @@ std::string Simulator::getScreenText() const {
 
 bool Simulator::isHalted() const {
 	return cpu.getHalted();
+}
+void Simulator::loadProgram(const std::string& filename, int startAddress) {
+	cpu.reset();
+	screen.reset();
+	memory.reset();
+	ProgramLoader loader;
+	try {
+		loader.loadProgram(filename, memory, startAddress);
+	}
+	catch (...) {
+		memory.reset();
+		throw;
+	}
+	cpu.setPC(startAddress);
 }
