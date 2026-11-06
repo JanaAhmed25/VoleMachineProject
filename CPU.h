@@ -9,12 +9,13 @@ private:
 
 public:
     CPU();
-    bool getHalted();
+    void reset();
+    bool getHalted() const;
     void setHalted(bool value);
-    unsigned char getRegisters(int index);
+    unsigned char getRegisters(int index) const;
     void setRegisters(int index,unsigned char value);
-    unsigned char getPC();
+    unsigned char getPC() const;
     void setPC(unsigned char value);
-    unsigned short getIR();
+    unsigned short getIR() const;
     void setIR(unsigned short value);
 };

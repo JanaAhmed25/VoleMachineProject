@@ -1,16 +1,11 @@
 #include "Simulator.h"
 #include "HaltInstruction.h"
-
-Simulator::Simulator() {
-	for (int i = 0;i < 256;i++) {
-		memory[i] = 0;
-	}
-}
+#include <stdexcept>
 
 void Simulator::fetch() {
 	unsigned char PC = cpu.getPC();
-	unsigned char High = memory[PC];
-	unsigned char Low = memory[PC+1];
+	unsigned char High = memory.getCell(PC);
+	unsigned char Low = memory.getCell(PC + 1);
 	unsigned short instruction = (High << 8) | Low;
 	cpu.setIR(instruction);
 	cpu.setPC(PC + 2);
@@ -24,18 +19,21 @@ Instruction* Simulator::decode() {
 	case 0xC:
 		return new HaltInstruction();
 	default:
-		return nullptr;
+		throw std::runtime_error("Invalid instruction");
 	}
 }
 
 void Simulator::step() {
+	if (cpu.getHalted()) return;
 	fetch();
 	Instruction* inst = decode();
-	if (inst == nullptr) {
-		cpu.setHalted(true);
-		return;
+	try {
+		inst->execute(cpu);
 	}
-	inst->execute(cpu);
+	catch (...) {
+		delete inst;
+		throw;
+	}
 	delete inst;
 }
 
@@ -44,4 +42,35 @@ void Simulator::run() {
 	while (!cpu.getHalted()) {
 		step();
 	}
+}
+unsigned char Simulator::getRegister(int index) const {
+	return cpu.getRegisters(index);
+}
+
+void Simulator::setRegister(int index, unsigned char value) {
+	cpu.setRegisters(index, value);
+}
+
+unsigned char Simulator::getPC() const {
+	return cpu.getPC();
+}
+
+unsigned short Simulator::getIR() const {
+	return cpu.getIR();
+}
+
+unsigned char Simulator::getMemoryCell(int index) const {
+	return memory.getCell(index);
+}
+
+void Simulator::setMemoryCell(int index, unsigned char value) {
+	memory.setCell(index, value);
+}
+
+std::string Simulator::getScreenText() const {
+	return screen.getText();
+}
+
+bool Simulator::isHalted() const {
+	return cpu.getHalted();
 }
