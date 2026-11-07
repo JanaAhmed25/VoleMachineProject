@@ -23,3 +23,14 @@ class JumpInstruction : public Instruction {
     JumpInstruction(unsigned char r, unsigned char xy);
     void execute (CPU& cpu) override;
 };
+
+class BitwiseInstruction : public Instruction{
+    private:
+    unsigned char r;
+    unsigned char s;
+    unsigned char t;
+    char kind;
+    public:
+    BitwizeInstruction(unsigned char r, unsigned char s, unsigned char t, char kind);
+    void execute (CPU& cpu) override;
+};
