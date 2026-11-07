@@ -16,17 +16,17 @@ void JumpInstruction::execute(CPU& cpu){
     }
 }
 
-BitwiseInstruction::BitwiseInstruction(unsigned char r, unsigned char s, unsigned char t, char kind) : r(r), s(s), t(t), kind(kind) {}
+BitwiseInstruction::BitwiseInstruction(unsigned char r, unsigned char s, unsigned char t, unsigned char kind) : r(r), s(s), t(t), kind(kind) {}
 
 void BitwiseInstruction::execute(CPU& cpu){
     unsigned char a = cpu.getRegisters(s);
     unsigned char b = cpu.getRegisters(t);
     unsigned char result;
 
-    if (kind == 'O'){
+    if (kind == 7){
         result = a | b;
     }
-    else if(kind == 'A'){
+    else if(kind == 8){
         result = a & b;
     }
     else{
