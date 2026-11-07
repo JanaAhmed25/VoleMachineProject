@@ -1,6 +1,6 @@
 #include "ConsoleUI.h"
 #include <iostream>      
-#include <iomanip> // setw, setfill (fixed-width printing)
+#include <iomanip>
 #include <string>         
 #include <stdexcept>      
 using namespace std;
@@ -171,7 +171,7 @@ void ConsoleUI::runStepByStep() {
     }
 
     cout << "Program finished!" << endl;
-    askLoadAnother();                         // doctor: ask exit or load another
+    askLoadAnother();
 }
 
 void ConsoleUI::askLoadAnother() {
