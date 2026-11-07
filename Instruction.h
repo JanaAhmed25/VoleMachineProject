@@ -29,8 +29,8 @@ class BitwiseInstruction : public Instruction{
     unsigned char r;
     unsigned char s;
     unsigned char t;
-    char kind;
+    unsigned char kind;
     public:
-    BitwizeInstruction(unsigned char r, unsigned char s, unsigned char t, char kind);
+    BitwiseInstruction(unsigned char r, unsigned char s, unsigned char t, unsigned char kind);
     void execute (CPU& cpu) override;
 };
