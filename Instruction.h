@@ -24,7 +24,7 @@ class JumpInstruction : public Instruction {
     void execute (CPU& cpu) override;
 };
 
-class BitwiseInstruction : public Instruction{
+class BitwiseInstruction : public Instruction {
     private:
     unsigned char r;
     unsigned char s;
@@ -32,5 +32,14 @@ class BitwiseInstruction : public Instruction{
     unsigned char kind;
     public:
     BitwiseInstruction(unsigned char r, unsigned char s, unsigned char t, unsigned char kind);
+    void execute (CPU& cpu) override;
+};
+
+class RotateInstruction : public Instruction {
+    private:
+    unsigned char r;
+    unsigned char count;
+    public:
+    RotateInstruction(unsigned char r, unsigned char count);
     void execute (CPU& cpu) override;
 };

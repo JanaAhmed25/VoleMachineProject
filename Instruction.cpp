@@ -35,3 +35,17 @@ void BitwiseInstruction::execute(CPU& cpu){
 
     cpu.setRegisters(r,result);
 }
+
+RotateInstruction::RotateInstruction(unsigned char r, unsigned char count) : r(r), count(count) {}
+
+void RotateInstruction::execute(CPU& cpu){
+    unsigned char value = cpu.getRegisters(r);
+    for (int i = 0; i < count; i++){
+        unsigned char last = value % 2;
+        value = value / 2;
+        if (last == 1){
+            value = value + 128;
+        }
+    }
+    cpu.setRegisters(r,value);
+}
