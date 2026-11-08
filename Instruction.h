@@ -1,4 +1,5 @@
 #pragma once
+#include "Memory.h"
 class CPU;
 class Instruction {
 public:
@@ -54,5 +55,16 @@ class AddInstruction : public Instruction {
     static unsigned char doubleToByte(double d);
     public:
     AddInstruction(unsigned char r, unsigned char s, unsigned char t, bool isFloat);
+    void execute (CPU& cpu) override;
+};
+
+class LoadInstruction : public Instruction {
+    private:
+    unsigned char r;
+    unsigned char xy;
+    unsigned char kind;
+    Memory& memory;
+    public:
+    LoadInstruction(unsigned char r, unsigned char xy, unsigned char kind, Memory& memory);
     void execute (CPU& cpu) override;
 };

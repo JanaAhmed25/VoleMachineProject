@@ -110,3 +110,14 @@ unsigned char AddInstruction::doubleToByte(double d){
     }
     return sign * 128 + storedExponent * 16 + mantissa;
 }
+
+LoadInstruction::LoadInstruction(unsigned char r, unsigned char xy, unsigned char kind, Memory& memory) : r(r), xy(xy), kind(kind), memory(memory) {}
+
+void LoadInstruction::execute(CPU& cpu){
+    if (kind == 1){
+        cpu.setRegisters(r, memory.getCell(xy));
+    }
+    else{
+        cpu.setRegisters(r, xy);
+    }
+}
