@@ -1,5 +1,6 @@
 #include "Simulator.h"
 #include "HaltInstruction.h"
+#include "ProgramLoader.h"
 #include <stdexcept>
 
 void Simulator::fetch() {
@@ -16,21 +17,14 @@ Instruction* Simulator::decode() {
 	unsigned short ir = cpu.getIR();
 	unsigned char opcode = ir >> 12;
 	switch (opcode) {
-	case 0x4: {
-		unsigned char r = (ir >> 4) & 0xF;
-		unsigned char s = ir & 0xF;
-		return new MoveInstruction(r, s);
-	}
-	case 0xB: {
-		unsigned char r = (ir >> 8) & 0xF;
-		unsigned char xy = ir & 0xFF;
-		return new JumpInstruction(r, xy);
-	}
 	case 0xC:
+		if ((ir & 0x0FFF) != 0) throw std::runtime_error("Invalid instruction");
 		return new HaltInstruction();
-	default:
-		throw std::runtime_error("Invalid instruction");
 	}
+}
+
+Simulator::Simulator() {
+	cpu.setHalted(true);
 }
 
 void Simulator::step() {
@@ -88,13 +82,16 @@ void Simulator::loadProgram(const std::string& filename, int startAddress) {
 	cpu.reset();
 	screen.reset();
 	memory.reset();
+	cpu.setHalted(true);
 	ProgramLoader loader;
 	try {
 		loader.loadProgram(filename, memory, startAddress);
 	}
 	catch (...) {
 		memory.reset();
+		cpu.setHalted(true);
 		throw;
 	}
 	cpu.setPC(startAddress);
+	cpu.setHalted(false);
 }
