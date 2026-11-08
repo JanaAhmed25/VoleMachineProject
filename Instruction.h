@@ -43,3 +43,16 @@ class RotateInstruction : public Instruction {
     RotateInstruction(unsigned char r, unsigned char count);
     void execute (CPU& cpu) override;
 };
+
+class AddInstruction : public Instruction {
+    private:
+    unsigned char r;
+    unsigned char s;
+    unsigned char t;
+    bool isFloat;
+    static double byteToDouble(unsigned char b);
+    static unsigned char doubleToByte(double d);
+    public:
+    AddInstruction(unsigned char r, unsigned char s, unsigned char t, bool isFloat);
+    void execute (CPU& cpu) override;
+};
