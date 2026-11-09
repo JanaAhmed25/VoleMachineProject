@@ -1,6 +1,4 @@
 #pragma once
-#include "Memory.h"
-#include "Screen.h"
 class CPU;
 class Instruction {
 public:
@@ -64,9 +62,8 @@ class LoadInstruction : public Instruction {
     unsigned char r;
     unsigned char xy;
     unsigned char kind;
-    Memory& memory;
     public:
-    LoadInstruction(unsigned char r, unsigned char xy, unsigned char kind, Memory& memory);
+    LoadInstruction(unsigned char r, unsigned char xy, unsigned char kind);
     void execute (CPU& cpu) override;
 };
 
@@ -74,9 +71,12 @@ class StoreInstruction : public Instruction {
     private:
     unsigned char r;
     unsigned char xy;
-    Memory& memory;
-    Screen& screen;
     public:
-    StoreInstruction(unsigned char r, unsigned char xy, Memory& memory, Screen& screen);
+    StoreInstruction(unsigned char r, unsigned char xy);
     void execute (CPU& cpu) override;
+};
+
+class HaltInstruction :public Instruction{
+public:
+	void execute(CPU& cpu) override;
 };

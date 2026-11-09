@@ -1,5 +1,4 @@
 #include "Simulator.h"
-#include "HaltInstruction.h"
 #include "Instruction.h"
 #include "ProgramLoader.h"
 #include <stdexcept>
