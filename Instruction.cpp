@@ -111,13 +111,23 @@ unsigned char AddInstruction::doubleToByte(double d){
     return sign * 128 + storedExponent * 16 + mantissa;
 }
 
-LoadInstruction::LoadInstruction(unsigned char r, unsigned char xy, unsigned char kind, Memory& memory) : r(r), xy(xy), kind(kind), memory(memory) {}
+LoadInstruction::LoadInstruction(unsigned char r, unsigned char xy, unsigned char kind) : r(r), xy(xy), kind(kind) {}
 
 void LoadInstruction::execute(CPU& cpu){
     if (kind == 1){
-        cpu.setRegisters(r, memory.getCell(xy));
+        cpu.setRegisters(r, cpu.readMemory(xy));
     }
     else{
         cpu.setRegisters(r, xy);
     }
+}
+
+StoreInstruction::StoreInstruction(unsigned char r, unsigned char xy) : r(r), xy(xy){}
+
+void StoreInstruction::execute(CPU&cpu){
+    cpu.writeMemory(xy,cpu.getRegisters(r));
+}
+
+void HaltInstruction::execute(CPU& cpu) {
+    cpu.setHalted(true);
 }
