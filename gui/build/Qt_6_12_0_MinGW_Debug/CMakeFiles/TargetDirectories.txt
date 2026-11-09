@@ -1,0 +1,5 @@
+C:/Users/Fix Zone/Desktop/VoleMachineProject/gui/build/Qt_6_12_0_MinGW_Debug/CMakeFiles/VoleMachineGUI.dir
+C:/Users/Fix Zone/Desktop/VoleMachineProject/gui/build/Qt_6_12_0_MinGW_Debug/CMakeFiles/edit_cache.dir
+C:/Users/Fix Zone/Desktop/VoleMachineProject/gui/build/Qt_6_12_0_MinGW_Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/Fix Zone/Desktop/VoleMachineProject/gui/build/Qt_6_12_0_MinGW_Debug/CMakeFiles/VoleMachineGUI_autogen_timestamp_deps.dir
+C:/Users/Fix Zone/Desktop/VoleMachineProject/gui/build/Qt_6_12_0_MinGW_Debug/CMakeFiles/VoleMachineGUI_autogen.dir
