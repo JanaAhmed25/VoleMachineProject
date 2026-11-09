@@ -21,9 +21,11 @@ void ProgramLoader::loadProgram(std::string filename, Memory &memory, int startA
 
     while (getline(file, line))
     {
-        if (line.empty() || line[0] == ';')
+        size_t start = line.find_first_not_of(" \t\r");
+        if (start == string::npos || line[start] == ';') 
             continue;
 
+        line = line.substr(start);
         string code = line.substr(0, 4);
 
         if (code.length() != 4)
