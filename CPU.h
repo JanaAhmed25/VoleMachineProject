@@ -13,6 +13,8 @@ private:
 
 public:
     CPU(Memory& memory, Screen& screen);
+    unsigned char readMemory(int address);
+    void writeMemory(int address, unsigned char value);
     void reset();
     bool getHalted() const;
     void setHalted(bool value);

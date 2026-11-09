@@ -3,7 +3,22 @@
 CPU::CPU(Memory& memory, Screen& screen) : memory(memory), screen(screen) {
 	reset();
 }
-
+unsigned char CPU::readMemory(int address) {
+	return memory.getCell(address);
+}
+void CPU::writeMemory(int address, unsigned char value) {
+	if (address == 0xFF) {
+		const char* hex = "0123456789ABCDEF";
+		std::string text;
+		text += hex[(value >> 4) & 0xF];
+		text += hex[value & 0xF];
+		text += ' ';
+		screen.addText(text);
+	}
+	else {
+		memory.setCell(address, value);
+	}
+}
 unsigned char CPU::getPC() const{
 	return PC;
 }
