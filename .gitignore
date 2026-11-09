@@ -13,3 +13,9 @@ Program7.txt
 Program8.txt
 Program9.txt
 Program10.txt
+build/
+build-*/
+.qtcreator/
+*.user
+.vscode/
+*.exe
