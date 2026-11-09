@@ -26,4 +26,5 @@ public:
     void setMemoryCell(int index, unsigned char value);
     std::string getScreenText() const;
     bool isHalted() const;
+    void reset();
 };
