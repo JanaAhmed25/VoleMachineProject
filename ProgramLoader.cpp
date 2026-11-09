@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void ProgramLoader::loadProgram(std::string filename, Memory &memory, int startAddress)
+int ProgramLoader::loadProgram(std::string filename, Memory &memory, int startAddress)
 {
     if (startAddress % 2 != 0 || startAddress >= 255 || startAddress < 0)
         throw runtime_error("Invalid start address");
@@ -17,6 +17,7 @@ void ProgramLoader::loadProgram(std::string filename, Memory &memory, int startA
         throw runtime_error("Could not open file " + filename);
 
     int address = startAddress;
+    int count = 0;
     string line;
 
     while (getline(file, line))
@@ -48,5 +49,8 @@ void ProgramLoader::loadProgram(std::string filename, Memory &memory, int startA
         memory.setCell(address + 1, second);
 
         address += 2;
+        count++;
     }
+
+    return count;
 }
