@@ -7,9 +7,9 @@
 
 class Simulator {
 private:
-    CPU cpu;
     Memory memory;
     Screen screen;
+    CPU cpu;
 
 public:
     Simulator();

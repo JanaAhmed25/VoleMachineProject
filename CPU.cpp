@@ -1,5 +1,6 @@
 #include "CPU.h"
-CPU::CPU() {
+
+CPU::CPU(Memory& memory, Screen& screen) : memory(memory), screen(screen) {
 	reset();
 }
 

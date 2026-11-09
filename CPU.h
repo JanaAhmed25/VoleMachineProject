@@ -1,14 +1,18 @@
 #pragma once
+#include "Memory.h"
+#include "Screen.h"
 
 class CPU {
 private:
+    Memory& memory;
+    Screen& screen;
     bool Halted;
     unsigned char Registers[16];
     unsigned char PC;
     unsigned short IR;
 
 public:
-    CPU();
+    CPU(Memory& memory, Screen& screen);
     void reset();
     bool getHalted() const;
     void setHalted(bool value);
@@ -18,4 +22,6 @@ public:
     void setPC(unsigned char value);
     unsigned short getIR() const;
     void setIR(unsigned short value);
+    unsigned char readMemory(int address);
+    void writeMemory(int address, unsigned char value);
 };
