@@ -131,3 +131,10 @@ void Simulator::loadProgram(const std::string& filename, int startAddress) {
 	cpu.setPC(startAddress);
 	cpu.setHalted(false);
 }
+
+void Simulator::reset() {
+	memory.reset();
+	screen.reset();
+	cpu.reset();
+	cpu.setHalted(true);
+}
