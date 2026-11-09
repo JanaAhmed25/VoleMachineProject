@@ -24,6 +24,4 @@ public:
     void setPC(unsigned char value);
     unsigned short getIR() const;
     void setIR(unsigned short value);
-    unsigned char readMemory(int address);
-    void writeMemory(int address, unsigned char value);
 };
