@@ -1,3 +1,5 @@
-   .vs/
-   x64/
-/.vs
+.vs/
+x64/
+*.exe
+*.o
+.vscode/
