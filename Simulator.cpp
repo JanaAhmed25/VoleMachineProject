@@ -114,10 +114,17 @@ void Simulator::loadProgram(const std::string& filename, int startAddress) {
 	cpu.setHalted(true);
 	ProgramLoader loader;
 	try {
-		loader.loadProgram(filename, memory, startAddress);
+		int count = loader.loadProgram(filename, memory, startAddress);
+		for (int i = 0; i < count; i++) {
+			int address = startAddress + i * 2;
+			cpu.setIR((memory.getCell(address) << 8) | memory.getCell(address + 1));
+			delete decode();
+		}
+		cpu.setIR(0);
 	}
 	catch (...) {
 		memory.reset();
+		cpu.reset();
 		cpu.setHalted(true);
 		throw;
 	}
