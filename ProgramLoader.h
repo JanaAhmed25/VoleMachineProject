@@ -5,7 +5,7 @@
 
 class ProgramLoader {    
     public:
-    void loadProgram(std::string filename, Memory& memory, int startAddress);
+    int loadProgram(std::string filename, Memory& memory, int startAddress);
 };
 
 #endif
