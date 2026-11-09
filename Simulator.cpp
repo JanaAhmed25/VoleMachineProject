@@ -1,12 +1,6 @@
 #include "Simulator.h"
 #include "HaltInstruction.h"
-#include "LoadInstruction.h"
-#include "StoreInstruction.h"
-#include "MoveInstruction.h"
-#include "AddInstruction.h"
-#include "BitwiseInstruction.h"
-#include "RotateInstruction.h"
-#include "JumpInstruction.h"
+#include "Instruction.h"
 #include "ProgramLoader.h"
 #include <stdexcept>
 
